@@ -1,0 +1,14 @@
+Hello RustHello RustHello RustHello RustHello RustHello RustHello RustHello Rust
+Hello Rust
+Hello Rust
+Hello Rust
+Hello Rust
+Hello Rust
+Hello Rust
+Factorial of 1 = 1
+Factorial of 2 = 2
+Factorial of 3 = 6
+Factorial of 4 = 24
+Factorial of 5 = 120
+Factorial of 6 = 720
+Factorial of 7 = 5040
