@@ -1,0 +1,15 @@
+Num = 1
+Num = 2
+Num = Buzz
+Num = 4
+Num = Fizz
+Num = Buzz
+Num = 7
+Num = 8
+Num = Buzz
+Num = Fizz
+Num = 11
+Num = Buzz
+Num = 13
+Num = 14
+Num = FizzBuzz
