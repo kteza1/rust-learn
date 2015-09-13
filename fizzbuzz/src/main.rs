@@ -7,8 +7,6 @@ use std::io::Write;
 
 
 fn main() {
-    println!("Hello, world!");
-
     let mut read_options = OpenOptions::new();
     read_options.read(true);
 
@@ -30,9 +28,9 @@ fn main() {
 
         match (num % 5, num % 3){
             (0, 0) => writeln!(& mut writer, "Num = {}", "FizzBuzz"),
-            (0, _)=> writeln!(& mut writer, "Num = {}", "Fizz"),
+            (0, _) => writeln!(& mut writer, "Num = {}", "Fizz"),
             (_, 0) => writeln!(& mut writer, "Num = {}", "Buzz"),
-            _    => writeln!(& mut writer, "Num = {}", num)
+            _      => writeln!(& mut writer, "Num = {}", num)
         };
     }
 
