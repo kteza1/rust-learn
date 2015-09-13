@@ -62,6 +62,25 @@ Most of the stuff is an expression in Rust. I.e they evaluates to a value
 
 * If - else blocks are expression => If else block evaluates to a value
 * match is an expression
-* Nested braces are expressions
+* Nested braces are expressions 
+* Entire funtion body is an expression
+
+FOR BLOCKS:
+
+Multiple expressions in a  { } (except match) should be separated by ;. Hence the line become statement.
+But line interals can be an expression. Statements return ().
+
+            ------ expression ------
+let hello = match min{X => 5,Y => 20};
+------------- statement --------------
+
+Combined, all the lines separated by ; inside {} will create an expression.
+
+                   --- exp 5 ---          ---- exp 9 --
+let a = if 1 < 2 { 1; 2; 3; 4; 5 } else { 4; 6; 7; 8; 9  };
+        --------------------- exp 5 ---------------------
+
+Expression value of lines separated by ; in {} is the value of last expression.
+
 
 */
