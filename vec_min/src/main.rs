@@ -55,3 +55,13 @@ fn main() {
         Number::Value(val) => println!("Minimum value = {}", val)
     }
 }
+
+/* NOTES:
+
+Most of the stuff is an expression in Rust. I.e they evaluates to a value
+
+* If - else blocks are expression => If else block evaluates to a value
+* match is an expression
+* Nested braces are expressions
+
+*/
