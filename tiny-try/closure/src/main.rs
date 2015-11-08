@@ -41,21 +41,42 @@ let cl_inc_1 = || -> i32 { i = i + 1; i} ;
 2. Closure will capture the variable in least restricting way. 
 	1. Reference (&T)  2. Mutable Reference (&mut T)  3. By Value (T)
 
-THINK OF CAPTURE AS PARAMETER BUT IN SAME SCOPE AS CAPTURING ENVIRONMENT
+W.r.t closures, THINK OF CAPTURE AS AN AUTO GENERATED ANONYMOUS STRUCT THAT COMPILER GENERATES 
+WHERE ITS MEMBERS ARE ASSIGNMETS TO ENVIRONMENT VARIABLES WITH SAME NAMES. THINK OF CLOSURE BODY AS
+ITS METHOD. LET'S CALL THIS METHOD AS 'M1'
+
+WHETHER THESE ASSIGNMENTS ARE REFERENCES or MUTABLE REFERENCES or MOVES IS DECIDED BY
+THE COMPILER IN A LEAST RESTRESTIVE MANNER BY SEEING HOW VARIABLES ARE BEING USED IN CLOSURE.
+
+THINK THAT THIS STRUCT IS IN SAME SCOPE AS THE ENVIRONMENT. SO ALL THE OWNERSHIP/BORROW RULES APPLY.
+
+YOU CAN THINK OF ASSIGNMENT TO CLOSURE AS CREATING A STRUCTURE 'VARIABLE'. SO ALL THE ASSIGNMENTS ARE DONE AND
+OWNERSHIP/BORROW RULES COMES INTO PICTURE.
+
+ANONYMOUS_STRUCT_VARIABLE() IS JUST SYNTACTIC SUGAR FOR CALLING M1()
 
 Capture type = &T
 ----------------
 
 let i = 100;
+
+		 /*1. Anonymous struct TYPE created (generated) with the implemementation as its method */
 let cl_inc_1 = ||{  let j: i32 = i + 1 + i + 2; 
-					println!("{}", i);           
-					j}; // 'i' is captured by the closure as &T
+		    println!("{}", i);           
+		    j
+		 }; 
+		 
+// 'i' is captured by the closure as &T
+
+/*2. Anonymous struct VARIABLE 
+created with all the 
+assignments to the environment */
+
+/* After 2, Owner/Borrow rules apply. */
 
 let cl_inc_2 = ||{let j: i32 = i + 2 + i + 3; j};
 
 println!("{}", i); // 'i' borrowed as &T
-
-CLOSURE TYPE = &T
 
 // Can call same closure multiple times
 cl_inc_1();
@@ -73,18 +94,22 @@ let mut i = 100;
 let k = 1000;
 
 let mut cl_inc_1 = ||{ 	i = i + k + 1; 					  
-						let j: i32 = i + 1 + i + 2; 
-						println!("{}", i);
-						j}; //'i' is captured by closure as '&mut T'.
-							//'k' is captured by closure as '&T'
+			let j: i32 = i + 1 + i + 2; 
+			println!("{}", i);
+		        j
+		     }; 
+		     
+//'i' is captured by closure as '&mut T'.
+//'k' is captured by closure as '&T'
 
-//CLOSURE TYPE = &mut T
-
-//Cannot use 'i' as long as 'cl_inc_1' is in scope
+//'i' already assigned mutably to 'cl_inc_1' struct variable. Cannot use 'i' as long as 'cl_inc_1' is in scope.
 //let cl_inc_2 = ||{ i = i + 2; let j: i32 = i + 2 + i + 3; j};
 //println!("{}", i);
 
-
+Closure compiler struct = {
+				i: &mut i32,
+				k: &i32
+			  }
 
 
 Capture type = T
@@ -96,13 +121,15 @@ let movable = Box::new(3);
 // A non-copy must move and so `movable` immediately moves into
 // the closure.
 
-
-//*** NOTE: Equivalant to closure having a implicit parameter of movable: Box<i32> = movable (T) but in same scope of enclosing env.
 let consume = || {
-    println!("`movable`: {:?}", movable); //closure captures 'movable' as &T
-    drop(movable);    // closure captures 'movable' as 'T'
-	//drop(movable);  // can't use movable ever again. It is moved
+    println!("`movable`: {:?}", movable); // closure captures 'movable' as &T
+    drop(movable);                        // closure captures 'movable' as 'T'
+    //drop(movable);                      // can't use movable ever again. This time the internal 'movable' is also moved into 'drop'
 };
+
+Closure compiler struct = {
+				movable: Box<i32>
+			  }
 
 /* You cannot define another closure which is using 'movable'
 let consume2 = || {
@@ -123,7 +150,6 @@ let consume2 = || {
 //and that non-copy type should not me moved again while calling the consume() again
 consume();
 //consume();
-
     
 
 'consume' closure is of type 'T' now. Which means it moved one of the environment
@@ -133,15 +159,13 @@ to move the variable which is 'dead'. 'movable' in this case.
 
 
 
-
-
 3. While passing the closure to a function, we need to specify its type.
 
-Closure type 'T' = FnOnce  ==>  Which means function accepts any closure which might have possibly captured the
-                                environment variable in all possible ways
+FnOnce  ==>  Which means function accepts any closure which might have possibly captured the
+             environment variable in all possible ways
 
 
-								But you cannot call this closure twice because it might have moved an environment variable
+But you cannot call this closure twice because it might have moved an environment variable
 
 
 Closure type '&mut T' = FnMut  ==> Function accepts a closure which might've captured a variable as '&mut T' or '&T' or both
