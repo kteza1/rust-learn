@@ -27,8 +27,10 @@ pub struct MqttClient {
 impl MqttClient{
     pub fn publish(&mut self, topic: &str, message: &str, qos: QualityOfService) {
 
-        let mut gconnection = self.connection.lock().unwrap(); //Got mutex guard
-        let ref mut publish_queue = gconnection.queue; 
+        //Got mutex guard
+        let mut gconnection = self.connection.lock().unwrap(); 
+        let ref mut publish_queue = gconnection.queue;
+        
         // Getting refs of actual 'connection' members using mutex guard
         // is borrowing entire mutex guard to RHS and hence below        
         // statements are'nt valid
@@ -47,10 +49,9 @@ src/client/publish.rs:20:36: 20:46 help: run `rustc --explain E0499` to see a de
 src/client/publish.rs:19:37: 19:47 note: previous borrow of `connection` occurs here; the mutable borrow prevents subsequent moves, borrows, or modification of `connection` until the borrow ends
 src/client/publish.rs:19         let ref mut publish_queue = connection.queue;
 ```
-———————————————————————————————————————
 
-WORKS
------
+1. WORKS (similar to 3.WORKS)
+--------
 
 ```rust
 pub fn publish(&mut self, topic: &str, message: &str, qos: QualityOfService) {
@@ -62,6 +63,7 @@ pub fn publish(&mut self, topic: &str, message: &str, qos: QualityOfService) {
         let ref mut current_pkid = connection.current_pkid;
         let ref mut stream = connection.stream;
 ```
+
 DOESN't WORK
 ------------
 
@@ -79,8 +81,8 @@ let mut connection = *self.connection.lock().unwrap();
 
 &mut self is a reference. You cannot move its (actual structs) underlying content using a reference
 
-WORKS
-—————
+2. WORKS
+---------
 
 ```rust
 impl MqttClient{
@@ -101,8 +103,8 @@ impl MqttClient{
 ```
 
 
-WORKS
-—————
+3. WORKS
+---------------
 
 ```rust
 impl MqttClient{
