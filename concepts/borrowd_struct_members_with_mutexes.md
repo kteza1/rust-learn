@@ -102,6 +102,7 @@ impl MqttClient{
 }
 ```
 
+NOTE: Deferencing borrowed struct is OK as long as you are not moving underlying content.
 
 3. WORKS
 ---------------
