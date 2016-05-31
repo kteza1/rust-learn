@@ -1,0 +1,78 @@
+TARGET = Some("x86_64-apple-darwin")
+OPT_LEVEL = Some("0")
+PROFILE = Some("debug")
+TARGET = Some("x86_64-apple-darwin")
+debug=true opt-level=0
+HOST = Some("x86_64-apple-darwin")
+TARGET = Some("x86_64-apple-darwin")
+TARGET = Some("x86_64-apple-darwin")
+HOST = Some("x86_64-apple-darwin")
+CC_x86_64-apple-darwin = None
+CC_x86_64_apple_darwin = None
+HOST_CC = None
+CC = None
+HOST = Some("x86_64-apple-darwin")
+TARGET = Some("x86_64-apple-darwin")
+HOST = Some("x86_64-apple-darwin")
+CFLAGS_x86_64-apple-darwin = None
+CFLAGS_x86_64_apple_darwin = None
+HOST_CFLAGS = None
+CFLAGS = None
+running: "cc" "-O0" "-ffunction-sections" "-fdata-sections" "-g" "-m64" "-fPIC" "-DBOOST_CONTEXT_EXPORT" "-o" "/Users/ravitejareddy/Desktop/rust-learn/scalable-chat/target/debug/build/context-560d5b8ee92a3619/out/src/asm/jump_x86_64_sysv_macho_gas.o" "-c" "src/asm/jump_x86_64_sysv_macho_gas.S"
+ExitStatus(ExitStatus(0))
+TARGET = Some("x86_64-apple-darwin")
+OPT_LEVEL = Some("0")
+PROFILE = Some("debug")
+TARGET = Some("x86_64-apple-darwin")
+debug=true opt-level=0
+HOST = Some("x86_64-apple-darwin")
+TARGET = Some("x86_64-apple-darwin")
+TARGET = Some("x86_64-apple-darwin")
+HOST = Some("x86_64-apple-darwin")
+CC_x86_64-apple-darwin = None
+CC_x86_64_apple_darwin = None
+HOST_CC = None
+CC = None
+HOST = Some("x86_64-apple-darwin")
+TARGET = Some("x86_64-apple-darwin")
+HOST = Some("x86_64-apple-darwin")
+CFLAGS_x86_64-apple-darwin = None
+CFLAGS_x86_64_apple_darwin = None
+HOST_CFLAGS = None
+CFLAGS = None
+running: "cc" "-O0" "-ffunction-sections" "-fdata-sections" "-g" "-m64" "-fPIC" "-DBOOST_CONTEXT_EXPORT" "-o" "/Users/ravitejareddy/Desktop/rust-learn/scalable-chat/target/debug/build/context-560d5b8ee92a3619/out/src/asm/make_x86_64_sysv_macho_gas.o" "-c" "src/asm/make_x86_64_sysv_macho_gas.S"
+ExitStatus(ExitStatus(0))
+TARGET = Some("x86_64-apple-darwin")
+OPT_LEVEL = Some("0")
+PROFILE = Some("debug")
+TARGET = Some("x86_64-apple-darwin")
+debug=true opt-level=0
+HOST = Some("x86_64-apple-darwin")
+TARGET = Some("x86_64-apple-darwin")
+TARGET = Some("x86_64-apple-darwin")
+HOST = Some("x86_64-apple-darwin")
+CC_x86_64-apple-darwin = None
+CC_x86_64_apple_darwin = None
+HOST_CC = None
+CC = None
+HOST = Some("x86_64-apple-darwin")
+TARGET = Some("x86_64-apple-darwin")
+HOST = Some("x86_64-apple-darwin")
+CFLAGS_x86_64-apple-darwin = None
+CFLAGS_x86_64_apple_darwin = None
+HOST_CFLAGS = None
+CFLAGS = None
+running: "cc" "-O0" "-ffunction-sections" "-fdata-sections" "-g" "-m64" "-fPIC" "-DBOOST_CONTEXT_EXPORT" "-o" "/Users/ravitejareddy/Desktop/rust-learn/scalable-chat/target/debug/build/context-560d5b8ee92a3619/out/src/asm/ontop_x86_64_sysv_macho_gas.o" "-c" "src/asm/ontop_x86_64_sysv_macho_gas.S"
+ExitStatus(ExitStatus(0))
+TARGET = Some("x86_64-apple-darwin")
+TARGET = Some("x86_64-apple-darwin")
+HOST = Some("x86_64-apple-darwin")
+AR_x86_64-apple-darwin = None
+AR_x86_64_apple_darwin = None
+HOST_AR = None
+AR = None
+TARGET = Some("x86_64-apple-darwin")
+running: "ar" "crus" "/Users/ravitejareddy/Desktop/rust-learn/scalable-chat/target/debug/build/context-560d5b8ee92a3619/out/libboost_context.a" "/Users/ravitejareddy/Desktop/rust-learn/scalable-chat/target/debug/build/context-560d5b8ee92a3619/out/src/asm/jump_x86_64_sysv_macho_gas.o" "/Users/ravitejareddy/Desktop/rust-learn/scalable-chat/target/debug/build/context-560d5b8ee92a3619/out/src/asm/make_x86_64_sysv_macho_gas.o" "/Users/ravitejareddy/Desktop/rust-learn/scalable-chat/target/debug/build/context-560d5b8ee92a3619/out/src/asm/ontop_x86_64_sysv_macho_gas.o"
+ExitStatus(ExitStatus(0))
+cargo:rustc-link-lib=static=boost_context
+cargo:rustc-link-search=native=/Users/ravitejareddy/Desktop/rust-learn/scalable-chat/target/debug/build/context-560d5b8ee92a3619/out

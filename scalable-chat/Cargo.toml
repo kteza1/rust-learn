@@ -3,6 +3,5 @@ authors = ["kteza1 <k.teza1@gmail.com>"]
 name = "scalable-chat"
 version = "0.1.0"
 
-[dependencies]
-mio = "*"
-mioco = "*"
+[dependencies.mioco]
+git = "https://github.com/dpc/mioco.git"
